@@ -1,0 +1,48 @@
+@use '../breakpoints';
+
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	padding: 30px;
+
+	.logo {
+		width: 100%;
+
+        @include breakpoints.desktops{
+            width: 30%;
+        }
+        @include breakpoints.laptops{
+            width: 40%;
+        }
+		@include breakpoints.tablets {
+			width: 60%;
+		}
+		@include breakpoints.landscapePhone {
+			width: 80%;
+		}
+	}
+
+	.headerTitle {
+		text-align: center;
+	}
+
+	.pad {
+		width: 60%;
+
+        @include breakpoints.desktops{
+            width: 15%;
+        }
+        @include breakpoints.laptops{
+            width: 20%;
+        }
+		@include breakpoints.tablets {
+			width: 30%;
+		}
+		@include breakpoints.landscapePhone {
+			width: 40%;
+		}
+	}
+}

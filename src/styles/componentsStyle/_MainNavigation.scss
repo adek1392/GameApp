@@ -1,0 +1,167 @@
+@use '../breakpoints';
+
+.menuBox {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 50px;
+    padding: 5px 10px;
+	background-color: rgb(27, 38, 59);
+
+     @include breakpoints.tablets{
+
+     }
+
+	.navBox {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgb(27, 38, 59);
+		transform: translateX(100%);
+		transition: 0.4s;
+		z-index: 2;
+
+        @include breakpoints.desktops{
+            position: relative;
+            transform: translateX(0)
+        }
+        @include breakpoints.laptops {
+             position: relative;
+            transform: translateX(0)
+        }
+        @include breakpoints.tablets{
+            position: relative;
+            transform: translateX(0);
+        }
+		.mainNavLinks {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+
+            @include breakpoints.desktops{
+                 flex-direction: row;
+                justify-content: space-evenly;
+            }
+
+            @include breakpoints.laptops{
+                flex-direction: row;
+                justify-content: space-evenly;
+            }
+
+             @include breakpoints.tablets{
+                flex-direction: row;
+                justify-content: space-evenly;
+                
+                
+             }
+
+			.navLink {
+                font-weight: 600;
+				font-size: 2rem;
+				padding: 30px 0;
+				cursor: pointer;
+				text-decoration: none;
+				color: #fff;
+				transition: 0.3s;
+
+                @include breakpoints.desktops{
+                    font-size: 1.8rem;
+                }
+
+                @include breakpoints.laptops{
+                    font-size: 1.8rem;
+                }
+
+                @include breakpoints.tablets{
+                    font-size: 1.6rem;
+                }
+
+                &.active{
+                    color: rgb(246, 250, 6);
+                }
+			}
+
+			a:hover {
+				scale: 1.3;
+			}
+		}
+	}
+
+	.navActive {
+		transform: translateX(0);
+	}
+
+	.hamburger {
+		padding: 10px;
+		display: inline-block;
+		cursor: pointer;
+		background-color: transparent;
+		border: 0;
+		margin: 0;
+		z-index: 2;
+@include breakpoints.desktops{
+    display: none;
+}
+           @include breakpoints.laptops{
+            display: none;
+           }
+		@include breakpoints.tablets {
+			display: none;
+		}
+
+		.hamburgerBox {
+			width: 40px;
+			height: 24px;
+			display: inline-block;
+			position: relative;
+			.hamburgerInner {
+				width: 100%;
+				height: 3px;
+				background-color: rgb(251, 248, 204);
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				transition: 0.3s;
+			}
+			.hamburgerInner::before,
+			.hamburgerInner::after {
+				content: '';
+				width: 100%;
+				height: 3px;
+				background-color: rgb(251, 248, 204);
+				position: absolute;
+				left: 0;
+			}
+			.hamburgerInner::before {
+				top: -10px;
+				transition: 0.3s;
+			}
+			.hamburgerInner::after {
+				top: 10px;
+			}
+		}
+	}
+
+	.hamburgerActive {
+		.hamburgerBox {
+			.hamburgerInner {
+				background-color: transparent;
+				transition: 0.1s;
+			}
+			.hamburgerInner::before {
+				transform: translateY(10px) rotate(45deg);
+				transition: 0.3s, 0.2s;
+			}
+			.hamburgerInner::after {
+				transform: translateY(-10px) rotate(-45deg);
+				transition: 0.3s, 0.2s;
+			}
+		}
+	}
+}
