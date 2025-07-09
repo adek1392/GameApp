@@ -1,8 +1,12 @@
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
+import { useCart } from '../store/CartContext' 
 
 export default function MainNavigation() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+	const { getTotalItems } = useCart()
+	const cartItemCount = getTotalItems()
 
 	function toggleMenu() {
 		setIsMenuOpen(prev => !prev)
@@ -32,7 +36,7 @@ export default function MainNavigation() {
 						PC
 					</NavLink>
 					<NavLink to='/cart' onClick={closeMenu} className={({isActive})=> isActive ? 'navLink active' : 'navLink'}>
-						Cart
+						Cart {cartItemCount > 0 && `(${cartItemCount})`}
 					</NavLink>
 				</nav>
 			</div>
