@@ -7,9 +7,9 @@ export default function GamesCards({ title, apiUrl }) {
 
 	const [currentPage, setCurrentPage] = useState(1)
 	const [pageSize] = useState(40)
-	 const [totalGamesCount, setTotalGamesCount] = useState(0)
+	const [totalGamesCount, setTotalGamesCount] = useState(0)
 
-	const {addToCart} = useCart()
+	const { addToCart } = useCart()
 
 	async function fetchGames() {
 		const apiKey = import.meta.env.VITE_RAWG_API_KEY
@@ -38,7 +38,7 @@ export default function GamesCards({ title, apiUrl }) {
 
 	useEffect(() => {
 		fetchGames()
-	}, [apiUrl,currentPage,pageSize])
+	}, [apiUrl, currentPage, pageSize])
 
 	function handleDotClick(gameId, index) {
 		setCurrentSlides(prev => ({
@@ -51,7 +51,7 @@ export default function GamesCards({ title, apiUrl }) {
 		addToCart(game)
 	}
 
-	 const totalPages = Math.ceil(totalGamesCount / pageSize);
+	const totalPages = Math.ceil(totalGamesCount / pageSize)
 
 	const handlePageChange = pageNumber => {
 		if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -62,7 +62,7 @@ export default function GamesCards({ title, apiUrl }) {
 
 	return (
 		<>
-            <h2>{title }</h2>
+			<h2 className='headerTitle'>{title}</h2>
 			<div className='gameCartWrapper'>
 				<ul className='gameCartBox'>
 					{games.map(game => {
@@ -92,28 +92,36 @@ export default function GamesCards({ title, apiUrl }) {
 									</div>
 								</div>
 
-                                <div className='gameContent'>
-                                    
+								<div className='gameContent'>
 									<h4 className='gameName'>{game.name}</h4>
 
 									<p className='gamePrice'>{game.price}$</p>
 
 									<div className='gameButtons'>
 										<button>See details</button>
-										<button onClick={()=> handleBuyClick(game)}>Buy</button>
+										<button onClick={() => handleBuyClick(game)}>Buy</button>
 									</div>
 								</div>
 							</li>
 						)
 					})}
 				</ul>
+			<div className='paginationControls'>
+				<button className='paginationBtn' onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+					Previous
+				</button>
+				<p className='pageInfo'>
+					Page {currentPage} of {totalPages}
+				</p>
+				<button
+					className='paginationBtn'
+					onClick={() => handlePageChange(currentPage + 1)}
+					disabled={currentPage === totalPages || totalPages === 0}>
+					Next
+				</button>
+			</div>
 			</div>
 
-			<div className="paginationControls">
-				<button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-				<p className="pageInfo">Page {currentPage} of {totalPages}</p>
-				<button onClick={()=>handlePageChange(currentPage + 1)} disabled={currentPage === totalPages || totalPages === 0}>Next</button>
-			</div>
 		</>
 	)
 }
