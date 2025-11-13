@@ -1,51 +1,14 @@
-import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
-import { useCart } from '../store/CartContext' 
+import { useNavigate } from "react-router-dom"
 
 export default function MainNavigation() {
-	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const navigate = useNavigate()
 
-	const { getTotalItems } = useCart()
-	const cartItemCount = getTotalItems()
-
-	function toggleMenu() {
-		setIsMenuOpen(prev => !prev)
-	}
-
-	function closeMenu() {
-		setIsMenuOpen(false)
+	function handleClickBack() {
+		navigate('/')
 	}
 	return (
-		<div className='menuBox'>
-			<header className='shopTitle'>
-				<h1>GameShop</h1>
-			</header>
-
-			<div className={`navBox ${isMenuOpen ? 'navActive' : ''}`}>
-				<nav className='mainNavLinks'>
-					<NavLink to='/' onClick={closeMenu} className={({isActive})=> isActive ? 'navLink active' : 'navLink'}>
-						Home
-					</NavLink>
-					<NavLink to='/playStation' onClick={closeMenu} className={({isActive})=> isActive ? 'navLink active' : 'navLink'}>
-						PlayStation
-					</NavLink>
-					<NavLink to='/xbox' onClick={closeMenu} className={({isActive})=> isActive ? 'navLink active' : 'navLink'}>
-						Xbox
-					</NavLink>
-					<NavLink to='/pc' onClick={closeMenu} className={({isActive})=> isActive ? 'navLink active' : 'navLink'}>
-						PC
-					</NavLink>
-					<NavLink to='/cart' onClick={closeMenu} className={({isActive})=> isActive ? 'navLink active' : 'navLink'}>
-						Cart {cartItemCount > 0 && `(${cartItemCount})`}
-					</NavLink>
-				</nav>
-			</div>
-
-			<div className={`hamburger  ${isMenuOpen ? 'hamburgerActive' : ''} `} onClick={toggleMenu}>
-				<span className='hamburgerBox'>
-					<span className='hamburgerInner'></span>
-				</span>
-			</div>
+		<div className='menuBox' onClick={handleClickBack}>
+			<p className="brandName">GameLibrary</p>
 		</div>
 	)
 }

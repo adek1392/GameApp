@@ -1,14 +1,18 @@
 @use '../breakpoints';
 
 .headerTitle {
-	margin-top: 80px;
 	margin-bottom: 30px;
 	padding: 0 10px;
 	text-align: center;
 }
+
+.load{
+	font-weight: bold;
+	text-align: center;
+}
 .gameCartWrapper {
 	margin-top: 20px;
-	padding: 0 5px;
+	padding: 0 16px;
 
 	.gameCartBox {
 		display: flex;
@@ -68,6 +72,7 @@
 						width: 100%;
 						height: 100%;
 						object-fit: cover;
+						object-position: top center;
 						display: block;
 						border-top-left-radius: 10px;
 						border-top-right-radius: 10px;
@@ -110,9 +115,7 @@
 					text-align: center;
 				}
 
-				.gamePrice {
-					font-weight: 600;
-				}
+				
 
 				.gameButtons {
 					display: flex;
@@ -127,6 +130,7 @@
 						font-weight: 700;
 						border: none;
 						border-radius: 5px;
+						cursor: pointer;
 						transition: 0.3s;
 					}
 
@@ -142,7 +146,7 @@
 		justify-content: center;
 		align-items: center;
 		gap: 10px;
-		margin: 15px 0;
+		margin: 50px 0;
 
 		.paginationBtn {
 			padding: 5px 10px;
@@ -152,6 +156,7 @@
 			background-color: rgb(255, 255, 255);
 			font-family: 'Montserrat', sans-serif;
 			font-weight: bold;
+			cursor: pointer;
 			transition: 0.3s;
 
 			&:hover {

@@ -1,0 +1,19 @@
+@use '../breakpoints';
+
+.footer {
+    display: flex;
+	justify-content: center;
+	align-items: center;
+     flex-shrink: 0;
+	width: 100%;
+	height: 50px;
+	background: linear-gradient(90deg, #1a1a1a 0%, #08081a 100%);
+
+    .footerTextBox{
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        font-weight: bold;
+    }
+    
+}

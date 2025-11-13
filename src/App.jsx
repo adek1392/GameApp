@@ -1,29 +1,22 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import MainNavigation from './components/MainNavigation'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './page/Home'
+import RootLayout from './layout/RootLayout'
+import GameDetails from './page/GameDetails'
 import './styles/main.scss'
-import PlayStation from './page/PlayStation'
-import Xbox from './page/Xbox'
-import Pc from './page/Pc'
-import Cart from './page/Cart'
-import { CartContextProvider } from './store/CartContext'
 
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <RootLayout />,
+		children: [
+			{ index: true, element: <Home /> },
+			{ path: 'game/:id', element: <GameDetails /> },
+		],
+	},
+])
 
 function App() {
-	return (
-		<>
-			<CartContextProvider>
-				<MainNavigation />
-				<Routes>
-					<Route index={true} element={<Home />} />
-					<Route path='playStation' element={<PlayStation />} />
-					<Route path='xbox' element={<Xbox />} />
-					<Route path='pc' element={<Pc />} />
-					<Route path='cart' element={<Cart />} />
-				</Routes>
-			</CartContextProvider>
-		</>
-	)
+	return <RouterProvider router={router} />
 }
 
 export default App

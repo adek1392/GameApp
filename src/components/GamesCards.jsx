@@ -1,54 +1,20 @@
-import { useEffect, useState } from 'react'
-import { useCart } from '../store/CartContext'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import UseFetchGames from '../hooks/useFetchGames'
 
-export default function GamesCards({ title, apiUrl }) {
-	const [games, setGames] = useState([])
-	const [currentSlides, setCurrentSlides] = useState({})
-
+export default function GamesCards({ title, query }) {
 	const [currentPage, setCurrentPage] = useState(1)
-	const [pageSize] = useState(40)
-	const [totalGamesCount, setTotalGamesCount] = useState(0)
+	const [pageSize] = useState(20)
+	const navigate = useNavigate()
 
-	const { addToCart } = useCart()
-
-	async function fetchGames() {
-		const apiKey = import.meta.env.VITE_RAWG_API_KEY
-		const url = `${apiUrl}&key=${apiKey}&page=${currentPage}&page_size=${pageSize}`
-
-		try {
-			const response = await fetch(url)
-			if (!response.ok) {
-				throw new Error(`response status: ${response.status}`)
-			}
-
-			const gameData = await response.json()
-			console.log(gameData)
-
-			setTotalGamesCount(gameData.count)
-
-			const gamePrice = gameData.results.map(game => ({
-				...game,
-				price: (Math.random() * (100 - 10) + 10).toFixed(2),
-			}))
-			setGames(gamePrice)
-		} catch (error) {
-			console.error(error.message)
-		}
-	}
-
-	useEffect(() => {
-		fetchGames()
-	}, [apiUrl, currentPage, pageSize])
+	const { games, isLoading, totalGamesCount, error } = UseFetchGames(query, currentPage, pageSize)
+	const [currentSlides, setCurrentSlides] = useState({})
 
 	function handleDotClick(gameId, index) {
 		setCurrentSlides(prev => ({
 			...prev,
 			[gameId]: index,
 		}))
-	}
-
-	function handleBuyClick(game) {
-		addToCart(game)
 	}
 
 	const totalPages = Math.ceil(totalGamesCount / pageSize)
@@ -63,6 +29,11 @@ export default function GamesCards({ title, apiUrl }) {
 	return (
 		<>
 			<h2 className='headerTitle'>{title}</h2>
+			{isLoading && <p className='load'>Loading games...</p>}
+			{error && <p className='error'>Error: {error}</p>}
+			{!isLoading && !error && games.length === 0 && (
+				<p className='noResults'>{query ? `Oops! No results found for "${query}" ` : 'No games found.'}</p>
+			)}
 			<div className='gameCartWrapper'>
 				<ul className='gameCartBox'>
 					{games.map(game => {
@@ -78,6 +49,7 @@ export default function GamesCards({ title, apiUrl }) {
 												src={screenshots[currentIndex]?.image}
 												alt={`Screenshot of ${game.name}`}
 												className='carouselSlide'
+												fetchPriority='high'
 											/>
 										)}
 										<div className='carouselNav'>
@@ -94,34 +66,32 @@ export default function GamesCards({ title, apiUrl }) {
 
 								<div className='gameContent'>
 									<h4 className='gameName'>{game.name}</h4>
-
-									<p className='gamePrice'>{game.price}$</p>
-
 									<div className='gameButtons'>
-										<button>See details</button>
-										<button onClick={() => handleBuyClick(game)}>Buy</button>
+										<button onClick={() => navigate(`/game/${game.id}`)}>See details</button>
 									</div>
 								</div>
 							</li>
 						)
 					})}
 				</ul>
-			<div className='paginationControls'>
-				<button className='paginationBtn' onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-					Previous
-				</button>
-				<p className='pageInfo'>
-					Page {currentPage} of {totalPages}
-				</p>
-				<button
-					className='paginationBtn'
-					onClick={() => handlePageChange(currentPage + 1)}
-					disabled={currentPage === totalPages || totalPages === 0}>
-					Next
-				</button>
+				<div className='paginationControls'>
+					<button
+						className='paginationBtn'
+						onClick={() => handlePageChange(currentPage - 1)}
+						disabled={currentPage === 1}>
+						Previous
+					</button>
+					<p className='pageInfo'>
+						Page {currentPage} of {totalPages}
+					</p>
+					<button
+						className='paginationBtn'
+						onClick={() => handlePageChange(currentPage + 1)}
+						disabled={currentPage === totalPages || totalPages === 0}>
+						Next
+					</button>
+				</div>
 			</div>
-			</div>
-
 		</>
 	)
 }

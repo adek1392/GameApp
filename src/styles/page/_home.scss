@@ -1,49 +1,80 @@
 @use '../breakpoints';
 
-.header {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 20px;
-	margin-top: 80px;
-	padding:   0px 10px 10px 10px;;
+.formControl {
+	padding: 7px 10px;
+	background: #000;
+	border: 2px solid #fff;
+	border-radius: 5px;
+	font-weight: 800;
+	color: #fff;
+	transition: 0.3s;
 
-	.logo {
-		width: 100%;
-
-        @include breakpoints.desktops{
-            width: 30%;
-        }
-        @include breakpoints.laptops{
-            width: 40%;
-        }
+	@include breakpoints.landscapePhone {
+		width: 80%;
+	}
 		@include breakpoints.tablets {
-			width: 60%;
-		}
-		@include breakpoints.landscapePhone {
-			width: 80%;
-		}
+		width: 70%;
 	}
 
-	.headerTitle {
+		@include breakpoints.laptops {
+		width: 50%;
+	}
+
+		@include breakpoints.desktops{
+		width: 30%;
+	}
+}
+
+.headerBox {
+	padding: 100px 16px 16px 16px;
+
+
+
+	.headerText {
+		margin-bottom: 16px;
 		text-align: center;
 	}
 
-	.pad {
-		width: 60%;
+	.formBox {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
 
-        @include breakpoints.desktops{
-            width: 15%;
-        }
-        @include breakpoints.laptops{
-            width: 20%;
-        }
-		@include breakpoints.tablets {
-			width: 30%;
-		}
 		@include breakpoints.landscapePhone {
-			width: 40%;
+		align-items: center;
+	}
+		@include breakpoints.tablets {
+		align-items: center;
+	}
+		@include breakpoints.laptops {
+		align-items: center;
+	}
+		@include breakpoints.desktops {
+		align-items: center;
+	}
+
+		.inputSearch {
+			&::placeholder {
+				color: #fff;
+				font-weight: 400;
+			}
+
+			&:focus {
+				outline: 2px solid rgb(0, 150, 50);
+				background-color: #fff;
+				color: #000;
+			}
+		}
+
+		.formBtn {
+			font-size: 18px;
+			font-weight: bold;
+			cursor: pointer;
+
+			&:hover {
+				background-color: #fff;
+				color: #000;
+			}
 		}
 	}
 }

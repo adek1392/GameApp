@@ -1,0 +1,178 @@
+@use '../breakpoints';
+
+.loading {
+	padding-top: 70px;
+}
+
+.notFound {
+	padding-top: 70px;
+}
+
+.error {
+	padding-top: 70px;
+}
+
+.sectionWrapper {
+	display: flex;
+	justify-content: center;
+	padding: 100px 16px 50px 16px;
+	@include breakpoints.desktops {
+		padding: 100px 50px 50px 50px;
+	}
+	.gameDetalisSection {
+		@include breakpoints.tablets {
+			width: 90%;
+		}
+
+		@include breakpoints.laptops {
+			display: flex;
+			justify-content: center;
+			align-items: self-start;
+			gap: 20px;
+		}
+
+		@include breakpoints.desktops {
+			display: flex;
+			justify-content: center;
+			align-items: self-start;
+			gap: 20px;
+		}
+
+		.title {
+			margin-bottom: 16px;
+			text-align: center;
+
+			@include breakpoints.desktops{
+				font-size: 2.8rem;
+			}
+		}
+		.firstBlock {
+			@include breakpoints.laptops {
+				width: 50%;
+			}
+
+			@include breakpoints.desktops {
+				width: 40%;
+			}
+			.gameCoverBox {
+				.gameCover {
+					margin-bottom: 16px;
+					width: 100%;
+					height: 250px;
+					object-fit: cover;
+					object-position: center;
+					border-radius: 5px;
+
+					@include breakpoints.landscapePhone {
+						height: 320px;
+					}
+
+					@include breakpoints.tablets {
+						height: 350px;
+					}
+
+					@include breakpoints.laptops {
+						height: 400px;
+					}
+
+					@include breakpoints.desktops {
+						height: 400px;
+					}
+				}
+			}
+			.basicInfo {
+				display: flex;
+				justify-content: space-evenly;
+				font-weight: 600;
+				margin-bottom: 16px;
+
+				@include breakpoints.laptops {
+					font-size: 1.8rem;
+				}
+				@include breakpoints.desktops {
+					font-size: 1.8rem;
+				}
+
+				.ageInfo {
+					display: flex;
+					gap: 3px;
+				}
+
+				.raitingInfo {
+					display: flex;
+					gap: 3px;
+					.rateGreen {
+						padding: 2px 5px;
+						border-radius: 5px;
+						color: rgba(17, 24, 39, 1);
+						background-color: #7cfc00;
+					}
+
+					.rateYellow {
+						padding: 2px 5px;
+						border-radius: 5px;
+						background-color: rgb(251, 191, 36, 1);
+						color: rgba(17, 24, 39, 1);
+					}
+
+					.rateRed {
+						padding: 2px 5px;
+						border-radius: 5px;
+						background-color: rgba(239, 68, 68, 1);
+						color: rgba(17, 24, 39, 1);
+					}
+				}
+			}
+		}
+
+		.secondBlock {
+			@include breakpoints.laptops {
+				width: 50%;
+			}
+			@include breakpoints.desktops {
+				
+				width: 60%;
+			}
+			.descriptionBox {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 16px;
+				gap: 16px;
+			}
+
+			.metaDetails {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				padding: 30px 15px;
+				border-radius: 5px;
+				background: linear-gradient(45deg, rgb(10, 20, 30), rgb(30, 60, 90));
+
+				@include breakpoints.tablets {
+					justify-content: space-evenly;
+				}
+
+				@include breakpoints.laptops {
+					justify-content: space-around;
+				}
+				@include breakpoints.desktops {
+					justify-content: space-around;
+				}
+
+				.platformsBox {
+					list-style-type: none;
+				}
+
+				.metaTitle {
+					margin-bottom: 5px;
+					color: rgba(255, 255, 255, 0.85);
+					font-weight: 600;
+				}
+
+				.relaseDate {
+					text-align: center;
+				}
+			}
+		}
+	}
+}
