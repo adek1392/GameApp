@@ -39,3 +39,5 @@ export default function UseFetchGames(query, currentPage = 1, pageSize = 20) {
 
 	return { games, isLoading, totalGamesCount, error }
 }
+
+

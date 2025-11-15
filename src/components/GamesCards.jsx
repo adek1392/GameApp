@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import UseFetchGames from '../hooks/useFetchGames'
+import emptyScreen from '../assets/img/emptyScreen.jpg'
 
 export default function GamesCards({ title, query }) {
 	const [currentPage, setCurrentPage] = useState(1)
@@ -29,10 +30,10 @@ export default function GamesCards({ title, query }) {
 	return (
 		<>
 			<h2 className='headerTitle'>{title}</h2>
-			{isLoading && <p className='load'>Loading games...</p>}
-			{error && <p className='error'>Error: {error}</p>}
+			{isLoading && <p className='information'>Loading games...</p>}
+			{error && <p className='information'>Error: {error}</p>}
 			{!isLoading && !error && games.length === 0 && (
-				<p className='noResults'>{query ? `Oops! No results found for "${query}" ` : 'No games found.'}</p>
+				<p className='information'>{query ? `Oops! No results found for "${query}" ` : 'No games found.'}</p>
 			)}
 			<div className='gameCartWrapper'>
 				<ul className='gameCartBox'>
@@ -44,20 +45,20 @@ export default function GamesCards({ title, query }) {
 							<li key={game.id} className='gameCart'>
 								<div className='carousel'>
 									<div className='carouselTrackContainer'>
-										{screenshots.length > 0 && (
-											<img
-												src={screenshots[currentIndex]?.image}
-												alt={`Screenshot of ${game.name}`}
-												className='carouselSlide'
-												fetchPriority='high'
-											/>
-										)}
+										<img
+											src={screenshots[currentIndex]?.image || emptyScreen}
+											alt={`Screenshot of ${game.name}`}
+											className='carouselSlide'
+											fetchPriority='high'
+										/>
+
 										<div className='carouselNav'>
 											{screenshots.map((_, index) => (
 												<button
 													key={index}
 													onClick={() => handleDotClick(game.id, index)}
 													onMouseEnter={() => handleDotClick(game.id, index)}
+													aria-label='change slide'
 													className={`carouselIndicator ${currentIndex === index ? 'active' : ''}`}></button>
 											))}
 										</div>
@@ -65,7 +66,7 @@ export default function GamesCards({ title, query }) {
 								</div>
 
 								<div className='gameContent'>
-									<h4 className='gameName'>{game.name}</h4>
+									<p className='gameName'>{game.name}</p>
 									<div className='gameButtons'>
 										<button onClick={() => navigate(`/game/${game.id}`)}>See details</button>
 									</div>
@@ -95,3 +96,5 @@ export default function GamesCards({ title, query }) {
 		</>
 	)
 }
+
+

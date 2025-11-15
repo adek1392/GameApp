@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import GamesCards from '../components/GamesCards'
-
+import { Suspense, lazy } from 'react'
+const GamesCards = lazy(() => import('../components/GamesCards'))
 
 export default function Home() {
 	const [query, setQuery] = useState('')
@@ -43,10 +43,9 @@ export default function Home() {
 				</form>
 			</header>
 
-		
-
-			<GamesCards title={title} query={query} />
-			
+			<Suspense  fallback={<p className='gameStatus'>Loading Games...</p>}>
+				<GamesCards title={title} query={query} />
+			</Suspense>
 		</>
 	)
 }

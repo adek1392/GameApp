@@ -4,6 +4,7 @@ import RootLayout from './layout/RootLayout'
 import GameDetails from './page/GameDetails'
 import './styles/main.scss'
 
+
 const router = createBrowserRouter([
 	{
 		path: '/',
@@ -11,6 +12,7 @@ const router = createBrowserRouter([
 		children: [
 			{ index: true, element: <Home /> },
 			{ path: 'game/:id', element: <GameDetails /> },
+			
 		],
 	},
 ])

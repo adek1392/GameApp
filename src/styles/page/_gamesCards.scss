@@ -6,7 +6,8 @@
 	text-align: center;
 }
 
-.load{
+.information {
+	height: 100%;
 	font-weight: bold;
 	text-align: center;
 }
@@ -77,6 +78,13 @@
 						border-top-left-radius: 10px;
 						border-top-right-radius: 10px;
 						filter: brightness(0.8);
+
+						@include breakpoints.landscapePhone {
+							object-position: center;
+						}
+						@include breakpoints.tablets {
+							object-position: center;
+						}
 					}
 					.carouselNav {
 						position: absolute;
@@ -84,11 +92,13 @@
 						justify-content: center;
 						bottom: 10px;
 						left: 50%;
+						
 						transform: translateX(-50%);
 
 						.carouselIndicator {
 							width: 40px;
 							height: 5px;
+							padding: 5px 0;
 							border-radius: 10px;
 							margin: 0 4px;
 							border: none;
@@ -114,8 +124,6 @@
 				.gameName {
 					text-align: center;
 				}
-
-				
 
 				.gameButtons {
 					display: flex;
@@ -178,7 +186,7 @@
 			font-size: 1.2rem;
 			font-weight: 700;
 
-			@include breakpoints.desktops{
+			@include breakpoints.desktops {
 				font-size: 1.4rem;
 			}
 		}

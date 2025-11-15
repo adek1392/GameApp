@@ -1,5 +1,11 @@
 @use '../breakpoints';
 
+.gameStatus{
+	height: 100%;
+	font-weight: bold;
+	text-align: center;
+}
+
 .formControl {
 	padding: 7px 10px;
 	background: #000;

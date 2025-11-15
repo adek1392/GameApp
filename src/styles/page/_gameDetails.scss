@@ -1,7 +1,9 @@
 @use '../breakpoints';
 
-.loading {
+.detailsStatus {
 	padding-top: 70px;
+	font-weight: bold;
+	text-align: center;
 }
 
 .notFound {
@@ -42,7 +44,7 @@
 			margin-bottom: 16px;
 			text-align: center;
 
-			@include breakpoints.desktops{
+			@include breakpoints.desktops {
 				font-size: 2.8rem;
 			}
 		}
@@ -130,7 +132,6 @@
 				width: 50%;
 			}
 			@include breakpoints.desktops {
-				
 				width: 60%;
 			}
 			.descriptionBox {
@@ -171,6 +172,23 @@
 
 				.relaseDate {
 					text-align: center;
+				}
+			}
+
+			.backBtn {
+				margin-top: 20px;
+				padding: 5px 10px;
+				width: 100px;
+				border: none;
+				border-radius: 5px;
+				background-color: rgb(255, 255, 255);
+				font-family: 'Montserrat', sans-serif;
+				font-weight: bold;
+				cursor: pointer;
+				transition: 0.3s;
+
+				&:hover {
+					scale: 0.9;
 				}
 			}
 		}

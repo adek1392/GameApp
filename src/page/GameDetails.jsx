@@ -1,21 +1,25 @@
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import UseFetchGameDetails from '../hooks/UseFetchGameDetails'
+import emptyScreen from '../assets/img/emptyScreen.jpg'
+
 
 export default function GameDetails() {
 	const { id } = useParams()
+	const navigate = useNavigate()
+	
 
 	const { game, isLoading, error } = UseFetchGameDetails(id)
 
 	if (isLoading) {
-		return <p className='loading'>Loading game details...</p>
+		return <p className='detailsStatus'>Loading game details...</p>
 	}
 
 	if (error) {
-		return <p className='error'>Error loading game: {error.message}</p>
+		return <p className='detailsStatus'>Error loading game: {error.message}</p>
 	}
 
 	if (!game) {
-		return <p className='notFound'>Game not found or ID is invalid.</p>
+		return <p className='detailsStatus'>Game not found or ID is invalid.</p>
 	}
 	function getRatingClass(rating) {
 		if (rating >= 4.0) {
@@ -26,6 +30,12 @@ export default function GameDetails() {
 			return 'rateRed'
 		}
 	}
+
+	function handleClickBack() {
+		navigate('/')
+	}
+
+
 	return (
 		<>
 			<div className='sectionWrapper'>
@@ -33,7 +43,7 @@ export default function GameDetails() {
 					<div className='firstBlock'>
 						<h2 className='title'>{game.name}</h2>
 						<div className='gameCoverBox'>
-							<img className='gameCover' src={game.background_image} alt={game.name} />
+							<img className='gameCover' src={game.background_image || emptyScreen} alt={game.name} loading='lazy' />
 						</div>
 
 						<div className='basicInfo'>
@@ -70,6 +80,7 @@ export default function GameDetails() {
 								<p>{game.released}</p>
 							</div>
 						</div>
+					<button className='backBtn' onClick={handleClickBack}> Back</button>
 					</div>
 				</section>
 			</div>
