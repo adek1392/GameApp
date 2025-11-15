@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import UseFetchGames from '../hooks/useFetchGames'
+import UseFetchGames from '../hooks/UseFetchGames'
 import emptyScreen from '../assets/img/emptyScreen.jpg'
 
 export default function GamesCards({ title, query }) {
